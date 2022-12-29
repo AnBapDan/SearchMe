@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                             if (user != null) {
                                 newUser.uid = user.uid
                             }
-                            newUser.salvarDados()
+                            newUser.saveData()
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         } else {

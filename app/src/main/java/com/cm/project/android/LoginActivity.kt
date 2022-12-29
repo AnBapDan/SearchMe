@@ -24,11 +24,9 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener{
             user.email = binding.emailInput.text.toString()
             user.password = binding.pass1.text.toString()
-           Log.d("EMAIL", binding.emailInput.text.toString())
-            Log.d("PASSWORD", user.password)
-            auth.signInWithEmailAndPassword(user.email, user.password).addOnCompleteListener(this,{ task ->
+            auth.signInWithEmailAndPassword(user.email, user.password).addOnCompleteListener(this) { task ->
                 Log.d("ERRO", task.exception.toString())
-                if (task.isSuccessful){
+                if (task.isSuccessful) {
                     val profile: FirebaseUser? = auth.currentUser
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -40,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            })
+            }
         }
 
     }
