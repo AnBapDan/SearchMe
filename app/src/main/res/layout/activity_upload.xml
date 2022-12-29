@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:layout_margin="5pt"
+    android:id="@+id/UploadA"
+    tools:context=".UploadActivity">
+    <ImageView
+        android:layout_marginTop="20pt"
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10pt"
+        android:src="@drawable/logo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="top"
+        android:layout_weight="9"
+        android:orientation="vertical">
+        <TextView
+            android:gravity="center"
+            android:id="@+id/form_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nova Localização"
+            android:layout_marginBottom="10pt"
+            android:textSize="24sp" />
+        <EditText
+            android:id="@+id/name_field"
+            android:layout_marginBottom="2pt"
+            android:paddingStart="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="25pt"
+            android:textColorHint="#9A000000"
+            android:hint="Nome do Local"
+            android:background="@drawable/edit_text"
+            android:textColor="@color/black"/>
+        <LinearLayout
+            android:layout_marginTop="10pt"
+            android:layout_marginBottom="10pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/lat"
+                android:layout_width="0dp"
+                android:layout_height="25pt"
+                android:layout_weight="1"
+                android:layout_marginEnd="5pt"
+                android:hint="Latitude"
+                android:background="@drawable/edit_text"
+                android:inputType="numberSigned|numberDecimal" />
+            <EditText
+                android:id="@+id/lon"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="25pt"
+                android:hint="Longitude"
+                android:background="@drawable/edit_text"
+                android:inputType="numberSigned|numberDecimal" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:hint="Longitude"
+            android:background="@drawable/edit_text"
+            android:inputType="text" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_button"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submeter Pedido"/>
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu"
+       />
+
+
+
+</LinearLayout>

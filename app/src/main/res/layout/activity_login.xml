@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:weightSum="6">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10pt"
+                android:textSize="14sp"
+                android:layout_marginBottom="2pt"
+
+                android:text="Endereço de email" />
+            <EditText
+                android:id="@+id/email_input"
+                android:paddingStart="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="25pt"
+                android:background="@drawable/edit_text"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:textColorHint="#9A000000"
+                android:hint="\johnDoe@email.com">
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10pt"
+                android:textSize="14sp"
+                android:text="Password" />
+
+            <EditText
+                android:id="@+id/pass1"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="25pt"
+                android:background="@drawable/edit_text"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:hint="">
+            </EditText>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_button"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Iniciar Sessão"></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

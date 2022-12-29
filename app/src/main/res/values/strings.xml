@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SearchMe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_register">Insere o teu nome de Utilizador</string>
+    <string name="email_register">Insere aqui o teu email</string>
+    <string name="pass_register">Define a tua password</string>
+    <string name="pass_confirmation">Confirma a tua password</string>
+    <string name="invalid_email">Email inválido, verifica novamente.</string>
+    <string name="invalid_username">O nome de utilizador não pode conter caracteres especiais</string>
+    <string name="password_mismatch">Passwords não coincidem, verifica novamente.</string>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>
