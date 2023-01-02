@@ -3,17 +3,39 @@ package com.cm.project.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cm.project.android.databinding.ActivityUploadBinding
+import com.cm.project.android.models.Markers
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class UploadActivity : AppCompatActivity() {
     private lateinit var binding:ActivityUploadBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_upload)
+        setContentView(binding.root)
+
+        binding.submitButton.setOnClickListener{
+            Toast.makeText(applicationContext,"CLICKED", Toast.LENGTH_LONG).show()
+            val newMarker = Markers(
+                binding.nameField.toString(),
+                binding.lat.toString(),
+                binding.lon.toString(),
+                binding.description.toString()
+            )
+
+            newMarker.saveMarker()
+            val homeIntent = Intent(this, MainActivity::class.java)
+            startActivity(homeIntent)
+        }
+
+
+
+
+
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->

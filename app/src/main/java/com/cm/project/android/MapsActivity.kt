@@ -43,6 +43,7 @@ internal class MapsActivity : AppCompatActivity(),
         map.isMyLocationEnabled = true
         map.setOnMyLocationButtonClickListener(this)
         map.setOnMyLocationClickListener(this)
+        onMyLocationButtonClick()
     }
 
     override fun onMyLocationClick(location: Location) {

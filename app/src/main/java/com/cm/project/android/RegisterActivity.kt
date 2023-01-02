@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.cm.project.android.config.FirebaseConfig
 import com.cm.project.android.databinding.ActivityRegisterBinding
 import com.cm.project.android.models.User
 import com.google.android.gms.tasks.OnCompleteListener
@@ -44,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             //Register on Firebase
-            auth = FirebaseAuth.getInstance()
+            auth = FirebaseConfig.firebaseAuth
             val newUser = User(binding.userInput.text.toString(), binding.emailInput.text.toString(),binding.pass1.text.toString(),"-1")
             auth.createUserWithEmailAndPassword(newUser.email, newUser.password)
                 .addOnCompleteListener(this,
