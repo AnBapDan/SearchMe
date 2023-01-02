@@ -6,23 +6,46 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import com.cm.project.android.config.FirebaseConfig
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.database.DatabaseReference
 import kotlin.math.*
 
 class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
+    private fun loadMarkers(){
+        var database: DatabaseReference? = FirebaseConfig.firebaseDatabase
+        database?.child("Markers")?.get()?.addOnCompleteListener{ task ->
+            if(task.isSuccessful){
+                val result = task.result
+                result?.let{
+                    result.children.map{ snapshot ->
+                       // Log.d("marker",marker.toString())
+                        val latLng = LatLng( snapshot.child("lat").value.toString().toDouble(),
+                            snapshot.child("lon").value.toString().toDouble())
+                        val markerOptions = MarkerOptions()
+                        markerOptions.position(latLng)
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                        markerOptions.title(snapshot.child("location").value.toString())
+                        mMap?.addMarker(markerOptions)
 
+                    }
+                }
+            }
+        }
+    }
 
     lateinit var client: FusedLocationProviderClient
 
@@ -44,6 +67,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
 
     private val callback = OnMapReadyCallback { googleMap ->
         mMap = googleMap
+        loadMarkers()
         val aveiro = LatLng(40.63290338497802, -8.65919152474748)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(aveiro))
     }
@@ -53,7 +77,6 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
@@ -93,7 +116,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
         super.onStop()
         stopLocationUpdates()
     }
-
+    private var flag = true
     fun onLocationChange(location: Location){
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker!!.remove()
@@ -104,8 +127,8 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
         markerOptions.title("Current Position")
 
         mCurrLocationMarker = mMap!!.addMarker(markerOptions)
-        mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(18f))
+
+
 
     }
 

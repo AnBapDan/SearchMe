@@ -20,14 +20,44 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cm.project.android.R
+import com.cm.project.android.config.FirebaseConfig
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.DatabaseReference
 
 internal class MapsActivity : AppCompatActivity(),
     OnMyLocationButtonClickListener, OnMyLocationClickListener, OnMapReadyCallback {
+
+    private fun loadMarkers(map:GoogleMap){
+        var database: DatabaseReference? = FirebaseConfig.firebaseDatabase
+        database?.child("Markers")?.get()?.addOnCompleteListener{ task ->
+            if(task.isSuccessful){
+                val result = task.result
+                result?.let{
+                    result.children.map{ snapshot ->
+                        // Log.d("marker",marker.toString())
+                        val latLng = LatLng( snapshot.child("lat").value.toString().toDouble(),
+                            snapshot.child("lon").value.toString().toDouble())
+                        val markerOptions = MarkerOptions()
+                        markerOptions.position(latLng)
+                        markerOptions.icon(
+                            BitmapDescriptorFactory.defaultMarker(
+                                BitmapDescriptorFactory.HUE_YELLOW))
+                        markerOptions.title(snapshot.child("location").value.toString())
+                        map?.addMarker(markerOptions)
+
+                    }
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -43,6 +73,7 @@ internal class MapsActivity : AppCompatActivity(),
         map.isMyLocationEnabled = true
         map.setOnMyLocationButtonClickListener(this)
         map.setOnMyLocationClickListener(this)
+        loadMarkers(map)
         onMyLocationButtonClick()
     }
 

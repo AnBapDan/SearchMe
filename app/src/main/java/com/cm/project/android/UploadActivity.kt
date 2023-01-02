@@ -24,7 +24,7 @@ class UploadActivity : AppCompatActivity() {
                 binding.nameField.toString(),
                 binding.lat.toString(),
                 binding.lon.toString(),
-                binding.description.toString()
+                binding.image.toString()
             )
 
             newMarker.saveMarker()
